@@ -1,6 +1,5 @@
 package org.iu;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +11,7 @@ import java.io.IOException;
 public class MyServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String acceptHeader = request.getHeader("Accept");
         System.out.println(acceptHeader);
         response.addHeader("FOO", "BAR");
@@ -20,8 +19,10 @@ public class MyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println(request.getRequestURI());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String firstName = request.getParameter("firstName");
+        System.out.println(firstName);
+        System.out.println("received POST Request ");
+        response.sendRedirect(request.getContextPath() + "/index.html");
     }
 }
